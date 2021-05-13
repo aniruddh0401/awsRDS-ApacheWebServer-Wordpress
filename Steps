@@ -1,0 +1,32 @@
+Steps:
+
+#configuring web server
+  yum install httpd -y
+  systemctl start httpd
+  systemctl status httpd
+  systemctl enable httpd
+
+#installing php7.2
+
+  amazon-linux-extras install php7.2 -y
+
+#installing and unzipping wordpress
+  wget http://wordpress.org/latest.tar.gz
+  tar xvzf  latest.tar.gz  -C  /var/www/html
+  cd /var/www/html/wordpress/
+  cat wp-config-sample.php > wp-config.php
+	
+#install mysql
+  yum install mysql -y  
+
+#create database and give endpoint from rds to it
+
+  mysql -h database-2.c06yeu9hc3oy.ap-south-1.rds.amazonaws.com -u admin -p
+
+#making changes required in the config.php file
+	
+  vim wp-config.php
+
+#restart httpd services
+
+  systemctl restart httpd
